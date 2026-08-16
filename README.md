@@ -25,7 +25,7 @@ redistributed here.
 | `logs/agent_log.jsonl` | One record per agent-loop run (152 in total: the 76 reported-campaign runs plus superseded attempts): verbatim prompt, verbatim model response, declared hypothesis and category, decision, scores, wall-clock cost, and model identifier with token usage. |
 | `logs/random_search_log.jsonl` | The matched-budget random-proposal control: sampled mutation, decision, scores, seed. |
 | `logs/results.tsv` | Every scored run, including the pilot, with the splits computed by each run (`splits_seen`, `selection_splits`). |
-| `logs/pilot/` | The methodological pilot: its controller log (131 iteration records) and its 3 July 2026 final evaluation (`final_eval_temporal_spatial.csv`), disclosed in Sect. 2.4 of the manuscript. |
+| `logs/pilot/` | The methodological pilot: its controller log (131 iteration records) and its 3 July 2026 final evaluation (`final_eval_temporal_spatial.csv`), disclosed in Sect. 2.4 of the manuscript. The pilot was driven by an OpenAI Codex agent whose exact model version was not logged; per-iteration model identification was introduced for the reported campaign. |
 | `results/confirmations/` | `metrics_by_basin.csv` for each of the 8 frozen confirmation runs: per-catchment KGE, NSE, log-NSE, PBIAS per evaluation split. These underlie Tables 4 and the confirmation figures. |
 | `results/training_histories/` | Per-epoch training histories of the sequence models. |
 | `results/catchment_index.csv` | Catchment attributes and gauge coordinates (EPSG:3035, derived from LamaH-CE) used by the map figure. |
