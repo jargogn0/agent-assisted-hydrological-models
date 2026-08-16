@@ -6,7 +6,8 @@ Doudou Ba and Jakub Langhammer
 Department of Physical Geography and Geoecology, Faculty of Science, Charles University, Prague
 
 This archive contains every artefact the manuscript's Code and data availability
-statement promises: the analysis pipeline, the locked configuration of every
+statement promises, together with the figure files and the daily simulated
+series of the confirmation runs: the analysis pipeline, the locked configuration of every
 reported experiment, the complete agent log with the verbatim prompt and
 response of every iteration, the per-epoch training histories, the
 catchment-level metric tables underlying all figures and tables, and the
@@ -26,7 +27,9 @@ redistributed here.
 | `logs/random_search_log.jsonl` | The matched-budget random-proposal control: sampled mutation, decision, scores, seed. |
 | `logs/results.tsv` | Every scored run, including the pilot, with the splits computed by each run (`splits_seen`, `selection_splits`). |
 | `logs/pilot/` | The methodological pilot: its controller log (131 iteration records) and its 3 July 2026 final evaluation (`final_eval_temporal_spatial.csv`), disclosed in Sect. 2.4 of the manuscript. The pilot was driven by an OpenAI Codex agent running, per the authors' records, GPT-5.5; the pilot logs do not record the model, and per-iteration model identification was introduced for the reported campaign. |
-| `results/confirmations/` | `metrics_by_basin.csv` for each of the 8 frozen confirmation runs: per-catchment KGE, NSE, log-NSE, PBIAS per evaluation split. These underlie Tables 4 and the confirmation figures. |
+| `results/confirmations/` | The complete evaluation tables of each of the 8 frozen confirmation runs: per-catchment metrics (`metrics_by_basin.csv`, underlying Table 4), observed and simulated runoff signatures, flood-event skill, feature importances, and model-setup records. |
+| `results/predictions/` | The daily simulated and observed series of every confirmation run (gzip-compressed CSV), from which all metrics and signatures can be recomputed. |
+| `figures/` | The figures of the manuscript (Figs. 1 to 6, Fig. S1, and the graphical abstract) in PNG and PDF, named by their manuscript numbers. |
 | `results/training_histories/` | Per-epoch training histories of the sequence models. |
 | `results/catchment_index.csv` | Catchment attributes and gauge coordinates (EPSG:3035, derived from LamaH-CE) used by the map figure. |
 | `results/*.json` | Computed outputs of the statistical analyses: paired basin-bootstrap intervals (`bootstrap_ci.json`, `bootstrap_components.json`), scorecard sensitivity (`scorecard_sensitivity.json`), and the agent-versus-control comparison (`random_vs_agent.json`). |
@@ -50,7 +53,10 @@ python analysis/trajectory_stats.py      # campaign trajectories (Table 3)
 ```
 
 (paths inside the scripts assume the original project layout; adjust the ROOT
-constant, or place this archive at the pipeline root, to re-run them).
+constant, or place this archive at the pipeline root, to re-run them). The
+cached feature matrix (`model_frame.parquet`, ~275 MB) is not stored here: the
+pipeline regenerates it deterministically from the LamaH-CE source data using
+the configurations in `pipeline/configs/`.
 
 ## A note on repeatability
 

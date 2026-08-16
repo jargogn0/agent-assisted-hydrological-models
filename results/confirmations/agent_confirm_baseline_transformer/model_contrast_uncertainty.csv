@@ -1,0 +1,10 @@
+split,contrast,label,n_basins,median_delta,ci_low,ci_high,win_rate,win_rate_ci_low,win_rate_ci_high,ci_level,method
+spatial_test,transformer_gain_vs_rf,Transformer - Random Forest KGE,50,0.026546234631948412,-0.029001111704313087,0.0919535467794158,0.6,0.46,0.74,0.95,paired_basin_bootstrap
+spatial_test,sequence_gain_vs_tree,Best sequence - best tree KGE,50,0.026546234631948412,-0.0326087836215271,0.08899851429624572,0.6,0.46,0.74,0.95,paired_basin_bootstrap
+spatial_test,tree_advantage,Best tree - best sequence KGE,50,-0.026546234631948412,-0.09026689715740294,0.0530069575296398,0.4,0.26,0.54,0.95,paired_basin_bootstrap
+test,transformer_gain_vs_rf,Transformer - Random Forest KGE,100,0.0419552978139065,0.013210518691536555,0.08528002151187332,0.65,0.56,0.75,0.95,paired_basin_bootstrap
+test,sequence_gain_vs_tree,Best sequence - best tree KGE,100,0.039545799771274204,0.011489878480699878,0.08327682798072035,0.65,0.56,0.74,0.95,paired_basin_bootstrap
+test,tree_advantage,Best tree - best sequence KGE,100,-0.039545799771274204,-0.08322870674805638,-0.010619766311373069,0.35,0.26,0.45,0.95,paired_basin_bootstrap
+val,transformer_gain_vs_rf,Transformer - Random Forest KGE,100,0.0730284054543674,0.039604723429326305,0.10288553739125203,0.67,0.57,0.76,0.95,paired_basin_bootstrap
+val,sequence_gain_vs_tree,Best sequence - best tree KGE,100,0.06238139682903743,0.03740059966137477,0.09858152215467605,0.67,0.57,0.76,0.95,paired_basin_bootstrap
+val,tree_advantage,Best tree - best sequence KGE,100,-0.06238139682903743,-0.09891647645217805,-0.03740059966137477,0.33,0.24,0.4202499999999986,0.95,paired_basin_bootstrap

@@ -1,0 +1,10 @@
+split,contrast,label,n_basins,median_delta,ci_low,ci_high,win_rate,win_rate_ci_low,win_rate_ci_high,ci_level,method
+spatial_test,memory_gain_xlstm_vs_rf,xLSTM - Random Forest KGE,50,0.04342387723049551,-0.0326525362403669,0.10404883334538606,0.58,0.44,0.72,0.95,paired_basin_bootstrap
+spatial_test,sequence_gain_vs_tree,Best sequence - best tree KGE,50,0.027620446746069643,-0.02977522552282222,0.09930472530400447,0.58,0.44,0.72,0.95,paired_basin_bootstrap
+spatial_test,tree_advantage,Best tree - best sequence KGE,50,-0.027620446746069643,-0.09930472530400447,0.03916288200358223,0.42,0.28,0.56,0.95,paired_basin_bootstrap
+test,memory_gain_xlstm_vs_rf,xLSTM - Random Forest KGE,100,0.06404368855557474,0.04117263897080681,0.08523688464962753,0.72,0.63,0.81,0.95,paired_basin_bootstrap
+test,sequence_gain_vs_tree,Best sequence - best tree KGE,100,0.062072407503403704,0.03995743862244727,0.08385195030630649,0.72,0.63,0.8,0.95,paired_basin_bootstrap
+test,tree_advantage,Best tree - best sequence KGE,100,-0.062072407503403704,-0.08370289205618775,-0.03995743862244727,0.28,0.19,0.37,0.95,paired_basin_bootstrap
+val,memory_gain_xlstm_vs_rf,xLSTM - Random Forest KGE,100,0.07884391320687945,0.04745924537263008,0.1153506357194436,0.82,0.74,0.89,0.95,paired_basin_bootstrap
+val,sequence_gain_vs_tree,Best sequence - best tree KGE,100,0.07559907024245427,0.043788249066491425,0.10813964633008027,0.81,0.73,0.88,0.95,paired_basin_bootstrap
+val,tree_advantage,Best tree - best sequence KGE,100,-0.07559907024245427,-0.11174514102476193,-0.04165526338355585,0.19,0.12,0.27,0.95,paired_basin_bootstrap
