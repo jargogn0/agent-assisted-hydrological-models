@@ -1,0 +1,13 @@
+model,split,basins,med_kge,q25_kge,med_nse,med_lognse,med_abs_pbias,fail_rate,med_abs_err_q95
+xgboost,"Temporal val (2010-13, 100 seen)",100,0.709,0.568,0.651,0.714,5.89,0.01,0.404
+xgboost,"Temporal test (2014-17, 100 seen)",100,0.668,0.538,0.617,0.69,8.65,0.01,0.365
+xgboost,Spatial test (50 held-out basins),50,0.514,0.354,0.46,0.528,20.11,0.12,0.684
+random_forest,"Temporal val (2010-13, 100 seen)",100,0.665,0.543,0.551,0.588,9.08,0.07,0.425
+random_forest,"Temporal test (2014-17, 100 seen)",100,0.616,0.491,0.48,0.555,10.67,0.1,0.367
+random_forest,Spatial test (50 held-out basins),50,0.474,0.35,0.337,0.437,20.13,0.24,0.578
+transformer,"Temporal val (2010-13, 100 seen)",100,0.741,0.633,0.636,0.717,7.75,0.01,0.273
+transformer,"Temporal test (2014-17, 100 seen)",100,0.731,0.628,0.615,0.688,5.91,0.01,0.232
+transformer,Spatial test (50 held-out basins),50,0.535,0.226,0.356,0.397,24.59,0.22,0.638
+xlstm,"Temporal val (2010-13, 100 seen)",100,0.774,0.686,0.658,0.721,6.56,0.01,0.268
+xlstm,"Temporal test (2014-17, 100 seen)",100,0.74,0.619,0.606,0.689,7.55,0.0,0.375
+xlstm,Spatial test (50 held-out basins),50,0.577,0.246,0.441,0.493,24.21,0.24,0.718

@@ -1,0 +1,136 @@
+project:
+  name: paper4_lamah_ce
+  run_name: hess_final_temporal
+  output_dir: paper4_pipeline/outputs/hess_final_temporal
+
+data:
+  root: 1_LamaH-CE_daily_hourly
+  basin_set: A
+  time_step: daily
+  max_catchments: null
+  min_valid_days: 3650
+  start_year: 2000
+  end_year: 2017
+  include_impacted: true
+  low_impact_only: false
+
+target:
+  variable: q_mm_day
+  transform: log1p
+
+splits:
+  temporal:
+    train_end_year: 2009
+    val_start_year: 2010
+    val_end_year: 2013
+    test_start_year: 2014
+    test_end_year: 2017
+  spatial:
+    enabled: false
+    n_folds: 5
+    test_fold: 0
+    fold_strategy: stratified_hydro
+    fold_seed: 42
+    evaluation_period: test
+
+features:
+  dynamic:
+    - prec
+    - 2m_temp_mean
+    - 2m_temp_max
+    - 2m_temp_min
+    - swe
+    - total_et
+    - volsw_123
+    - volsw_4
+    - surf_net_solar_rad_mean
+    - surf_net_therm_rad_mean
+    - surf_press
+  rolling_windows: [3, 7, 14, 30, 90, 180, 365]
+  static_families:
+    - climate
+    - topography
+    - landcover
+    - soil
+    - geology
+    - human
+    - network
+
+models:
+  # Final models are selected by validation tuning, then evaluated on locked test/spatial splits.
+  fit_splits: [train]
+  sample_per_basin_train: 1800
+  sample_limit_train: 900000
+  sample_seed: 42
+  final_n_jobs: 4
+  tuning:
+    enabled: true
+    scoring_split: val
+    sample_per_basin_train: 700
+    sample_limit_train: null
+    max_candidates_per_model: 6
+  random_forest:
+    enabled: true
+    n_estimators: 700
+    max_depth: 28
+    min_samples_leaf: 2
+    max_samples: 0.75
+    n_jobs: 4
+    random_state: 42
+    candidates:
+      - {n_estimators: 500, max_depth: 18, min_samples_leaf: 3, max_samples: 0.8}
+      - {n_estimators: 700, max_depth: 28, min_samples_leaf: 2, max_samples: 0.75}
+      - {n_estimators: 600, max_depth: 20, min_samples_leaf: 5, max_samples: 0.85}
+      - {n_estimators: 800, max_depth: 32, min_samples_leaf: 2, max_samples: 0.65}
+  xgboost:
+    enabled: true
+    n_estimators: 900
+    max_depth: 6
+    learning_rate: 0.030
+    subsample: 0.8
+    colsample_bytree: 0.8
+    reg_lambda: 6.0
+    objective: reg:squarederror
+    n_jobs: 4
+    random_state: 42
+    candidates:
+      - {n_estimators: 700, max_depth: 4, learning_rate: 0.050, subsample: 0.85, colsample_bytree: 0.85, reg_lambda: 2.0}
+      - {n_estimators: 900, max_depth: 4, learning_rate: 0.035, subsample: 0.90, colsample_bytree: 0.90, reg_lambda: 3.0}
+      - {n_estimators: 1200, max_depth: 5, learning_rate: 0.025, subsample: 0.85, colsample_bytree: 0.85, reg_lambda: 4.0}
+      - {n_estimators: 900, max_depth: 6, learning_rate: 0.030, subsample: 0.80, colsample_bytree: 0.80, reg_lambda: 6.0}
+      - {n_estimators: 1400, max_depth: 3, learning_rate: 0.025, subsample: 0.90, colsample_bytree: 0.95, reg_lambda: 2.0}
+      - {n_estimators: 1100, max_depth: 4, learning_rate: 0.025, subsample: 0.95, colsample_bytree: 0.80, reg_lambda: 5.0}
+
+sequence_models:
+  enabled: true
+  # Final sequence recipe: promoted Kratzert-style setup scaled to the full
+  # eligible LamaH-CE basin-A set. Keep this fixed for the locked HESS runs.
+  sequence_length: 365
+  sample_limit_train: 800000
+  sample_limit_eval: null
+  batch_size: 256
+  epochs: 30
+  epochs_by_model:
+    xlstm: 30
+    transformer: 30
+  early_stopping_patience: 10
+  learning_rate: 0.0005
+  hidden_size: 192
+  num_layers: 1
+  attention_heads: 4
+  dropout: 0.4
+  random_seed: 42
+  device: auto
+  torch_threads: 1
+  loss: nse
+  grad_clip: 1.0
+  cosine_schedule: true
+
+evaluation:
+  high_flow_quantile: 0.95
+  low_flow_quantile: 0.05
+  signature_min_years: 5
+  prediction_splits: [val, test]
+
+artifacts:
+  save_models: false

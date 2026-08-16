@@ -1,0 +1,58 @@
+{
+  "xgboost": {
+    "base": 27.4,
+    "a_best": 63.1,
+    "a_d": 35.6,
+    "a_prom": 9,
+    "a_at": 19,
+    "a_n": 20,
+    "r_best": 66.6,
+    "r_d": 39.1,
+    "r_prom": 6,
+    "r_at": 18,
+    "r_n": 20,
+    "noop": 2
+  },
+  "random_forest": {
+    "base": 53.6,
+    "a_best": 57.0,
+    "a_d": 3.3,
+    "a_prom": 3,
+    "a_at": 5,
+    "a_n": 20,
+    "r_best": 62.3,
+    "r_d": 8.7,
+    "r_prom": 5,
+    "r_at": 10,
+    "r_n": 20,
+    "noop": 2
+  },
+  "xlstm": {
+    "base": 81.6,
+    "a_best": 82.2,
+    "a_d": 0.5,
+    "a_prom": 1,
+    "a_at": 6,
+    "a_n": 6,
+    "r_best": 83.5,
+    "r_d": 1.8,
+    "r_prom": 1,
+    "r_at": 5,
+    "r_n": 6,
+    "noop": 0
+  },
+  "transformer": {
+    "base": 78.1,
+    "a_best": 84.3,
+    "a_d": 6.1,
+    "a_prom": 1,
+    "a_at": 3,
+    "a_n": 5,
+    "r_best": 78.1,
+    "r_d": 0.0,
+    "r_prom": 0,
+    "r_at": 0,
+    "r_n": 5,
+    "noop": 2
+  }
+}

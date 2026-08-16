@@ -1,0 +1,98 @@
+project:
+  name: paper4_lamah_ce
+  run_name: 20260607_063357_001_transformer_short_event_window_transformer
+  output_dir: /Volumes/doudou_usb/PhD Dissertation/PhD Final Paper 2026/paper4_pipeline/outputs/autoresearch/runs/20260607_063357_001_transformer_short_event_window_transformer
+data:
+  root: 1_LamaH-CE_daily_hourly
+  basin_set: A
+  time_step: daily
+  max_catchments: 180
+  min_valid_days: 3650
+  start_year: 2000
+  end_year: 2017
+  include_impacted: true
+  low_impact_only: false
+  stratified_subset:
+    target_n: 180
+    seed: 42
+    stratify_by:
+    - snow_class
+    - aridity_class
+    - geology_class
+target:
+  variable: q_mm_day
+  transform: log1p
+splits:
+  temporal:
+    train_end_year: 2009
+    val_start_year: 2010
+    val_end_year: 2013
+    test_start_year: 2014
+    test_end_year: 2017
+  spatial:
+    enabled: true
+    n_folds: 5
+    test_fold: 0
+    fold_strategy: stratified_hydro
+    fold_seed: 42
+    evaluation_period: test
+features:
+  dynamic:
+  - prec
+  - 2m_temp_mean
+  - 2m_temp_max
+  - 2m_temp_min
+  - swe
+  - total_et
+  - volsw_123
+  - volsw_4
+  - surf_net_solar_rad_mean
+  - surf_net_therm_rad_mean
+  - surf_press
+  rolling_windows:
+  - 3
+  - 7
+  - 14
+  - 30
+  - 90
+  - 180
+  - 365
+  static_families:
+  - climate
+  - topography
+  - landcover
+  - soil
+  - geology
+  - human
+  - network
+models:
+  fit_splits:
+  - train
+  sample_per_basin_train: 1800
+  sample_seed: 42
+  final_n_jobs: 4
+evaluation:
+  high_flow_quantile: 0.95
+  low_flow_quantile: 0.05
+  signature_min_years: 5
+  prediction_splits:
+  - val
+artifacts:
+  save_models: false
+sequence_models:
+  enabled: true
+  batch_size: 256
+  loss: nse
+  grad_clip: 1.0
+  cosine_schedule: true
+  device: auto
+  sample_limit_train: 240000
+  sample_limit_eval: 180000
+  epochs_by_model:
+    xlstm: 10
+    transformer: 16
+  sequence_length: 180
+  hidden_size: 192
+  attention_heads: 4
+  dropout: 0.2
+  learning_rate: 0.0002

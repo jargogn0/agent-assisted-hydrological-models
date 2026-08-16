@@ -1,0 +1,109 @@
+project:
+  name: paper4_lamah_ce
+  run_name: 20260607_080807_003_xgboost_adaptive_xgboost
+  output_dir: /Volumes/doudou_usb/PhD Dissertation/PhD Final Paper 2026/paper4_pipeline/outputs/autoresearch/runs/20260607_080807_003_xgboost_adaptive_xgboost
+data:
+  root: 1_LamaH-CE_daily_hourly
+  basin_set: A
+  time_step: daily
+  max_catchments: 150
+  random_subset:
+    target_n: 150
+    seed: 42
+  min_valid_days: 3650
+  start_year: 2000
+  end_year: 2017
+  include_impacted: true
+  low_impact_only: false
+target:
+  variable: q_mm_day
+  transform: log1p
+splits:
+  temporal:
+    train_end_year: 2009
+    val_start_year: 2010
+    val_end_year: 2013
+    test_start_year: 2014
+    test_end_year: 2017
+  basin_holdout:
+    enabled: true
+    train_basins: 100
+    test_basins: 50
+    seed: 42
+features:
+  dynamic:
+  - prec
+  - 2m_temp_mean
+  - 2m_temp_max
+  - 2m_temp_min
+  - swe
+  - total_et
+  - volsw_123
+  - volsw_4
+  - surf_net_solar_rad_mean
+  - surf_net_therm_rad_mean
+  - surf_press
+  rolling_windows:
+  - 1
+  - 3
+  - 7
+  - 14
+  - 30
+  - 60
+  - 90
+  - 180
+  - 365
+  static_families:
+  - climate
+  - topography
+  - landcover
+  - soil
+  - geology
+  - human
+  - network
+models:
+  fit_splits:
+  - train
+  sample_per_basin_train: 2200
+  sample_seed: 42
+  final_n_jobs: 4
+  random_forest:
+    enabled: false
+    n_estimators: 200
+    max_depth: 18
+    min_samples_leaf: 4
+    max_samples: 0.75
+    n_jobs: 4
+    random_state: 42
+  xgboost:
+    enabled: true
+    n_estimators: 700
+    max_depth: 8
+    learning_rate: 0.025
+    subsample: 0.9
+    colsample_bytree: 0.85
+    reg_lambda: 4.0
+    objective: reg:squarederror
+    n_jobs: 4
+    random_state: 42
+evaluation:
+  high_flow_quantile: 0.95
+  low_flow_quantile: 0.05
+  signature_min_years: 5
+  prediction_splits:
+  - val
+artifacts:
+  save_models: false
+  reuse_cached_frame: true
+sequence_models:
+  enabled: true
+  batch_size: 256
+  loss: nse
+  grad_clip: 1.0
+  cosine_schedule: true
+  device: auto
+  sample_limit_train: 200000
+  sample_limit_eval: 150000
+  epochs_by_model:
+    xlstm: 12
+    transformer: 12

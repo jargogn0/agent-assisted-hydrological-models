@@ -1,0 +1,2 @@
+model,epoch,epochs_max,learning_rate,train_loss,val_loss,best_epoch,best_val_loss,stale_epochs,batch_size,sample_count_train,sample_count_val,loss,grad_clip,cosine_schedule
+transformer,1,16,0.0001981746016383069,0.24826054999441988,0.21917736816371772,1,0.21917736816371772,0,256,240000,145903,nse,1.0,True

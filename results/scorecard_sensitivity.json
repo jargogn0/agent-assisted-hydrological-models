@@ -1,0 +1,98 @@
+{
+  "random_forest": {
+    "n_configs": 21,
+    "operational_winner": "agent_random_forest_20260811_031819_i05",
+    "variants": {
+      "efficiency-weighted": {
+        "spearman": 0.541,
+        "winner": "agent_random_forest_20260811_032340_i07",
+        "same_winner": false,
+        "operational_winner_rank": 5
+      },
+      "water-balance-weighted": {
+        "spearman": 0.482,
+        "winner": "agent_random_forest_20260811_032340_i07",
+        "same_winner": false,
+        "operational_winner_rank": 5
+      },
+      "robustness-weighted": {
+        "spearman": 0.59,
+        "winner": "agent_random_forest_20260811_032037_i06",
+        "same_winner": false,
+        "operational_winner_rank": 5
+      }
+    }
+  },
+  "xgboost": {
+    "n_configs": 42,
+    "operational_winner": "agent_xgboost_20260812_115452_i18",
+    "variants": {
+      "efficiency-weighted": {
+        "spearman": 0.927,
+        "winner": "agent_xgboost_20260812_115124_i17",
+        "same_winner": false,
+        "operational_winner_rank": 2
+      },
+      "water-balance-weighted": {
+        "spearman": 0.923,
+        "winner": "agent_xgboost_20260812_115452_i18",
+        "same_winner": true,
+        "operational_winner_rank": 1
+      },
+      "robustness-weighted": {
+        "spearman": 0.893,
+        "winner": "agent_xgboost_20260812_112954_i09",
+        "same_winner": false,
+        "operational_winner_rank": 25
+      }
+    }
+  },
+  "xlstm": {
+    "n_configs": 7,
+    "operational_winner": "agent_xlstm_20260812_211331_i06",
+    "variants": {
+      "efficiency-weighted": {
+        "spearman": 0.63,
+        "winner": "agent_xlstm_baseline0_20260812_200201",
+        "same_winner": false,
+        "operational_winner_rank": 5
+      },
+      "water-balance-weighted": {
+        "spearman": 0.704,
+        "winner": "agent_xlstm_20260812_211331_i06",
+        "same_winner": true,
+        "operational_winner_rank": 1
+      },
+      "robustness-weighted": {
+        "spearman": 1.0,
+        "winner": "agent_xlstm_20260812_211331_i06",
+        "same_winner": true,
+        "operational_winner_rank": 1
+      }
+    }
+  },
+  "transformer": {
+    "n_configs": 6,
+    "operational_winner": "agent_transformer_20260812_215101_i03",
+    "variants": {
+      "efficiency-weighted": {
+        "spearman": 1.0,
+        "winner": "agent_transformer_20260812_215101_i03",
+        "same_winner": true,
+        "operational_winner_rank": 1
+      },
+      "water-balance-weighted": {
+        "spearman": 0.6,
+        "winner": "agent_transformer_20260812_215101_i03",
+        "same_winner": true,
+        "operational_winner_rank": 1
+      },
+      "robustness-weighted": {
+        "spearman": 0.943,
+        "winner": "agent_transformer_20260812_220747_i05",
+        "same_winner": false,
+        "operational_winner_rank": 2
+      }
+    }
+  }
+}

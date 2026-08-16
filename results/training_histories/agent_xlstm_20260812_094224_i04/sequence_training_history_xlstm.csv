@@ -1,0 +1,2 @@
+model,epoch,epochs_max,learning_rate,train_loss,val_loss,best_epoch,best_val_loss,stale_epochs,batch_size,sample_count_train,sample_count_val,loss,grad_clip,cosine_schedule
+xlstm,1,8,0.0003373449722800014,0.23783397441034887,0.19861244496504465,1,0.19861244496504465,0,256,240000,120000,nse,1.0,True
