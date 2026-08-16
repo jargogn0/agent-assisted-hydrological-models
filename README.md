@@ -21,13 +21,14 @@ redistributed here.
 | `pipeline/src/` | The hydrological modelling pipeline (feature engineering, model training, evaluation, scorecard). |
 | `pipeline/autoresearch/` | The experiment drivers: `agent_loop.py` (agent arm), `random_search_loop.py` (matched-budget random-proposal control), `runner.py` (execution, scoring, promotion rule), `confirm_selected.py` (tier-3 confirmations), and `agent_brief.md` (the research brief shown to the agent). |
 | `pipeline/configs/` | Base configurations, including the two anchoring baselines (`configs/generated/agent_dev_base.yaml`, dated 7 June 2026, and `agent_dev_base_seq_fast.yaml`). |
-| `pipeline/generated_configs/` | The locked YAML of every executed experiment: the 71 agent iterations (`agent_*`), the 5 anchoring baselines (`*_baseline0_*`), the 8 confirmation runs (`agent_confirm_*`), the 55 random-proposal control runs (`rand_*`), and the earlier pilot configurations. |
-| `logs/agent_log.jsonl` | One record per reported-campaign iteration: verbatim prompt, verbatim model response, declared hypothesis and category, decision, scores, wall-clock cost, and model identifier with token usage. |
+| `pipeline/generated_configs/` | The locked YAML of every executed experiment, including the superseded development attempts that the audit trail retains. The reported campaign is the last lineage per family (the last two for XGBoost): 71 iterations plus 5 anchoring baselines, identified programmatically by `analysis/trajectory_stats.py`. Also present: the 8 confirmation runs (`agent_confirm_*`), the 55 random-proposal control runs (`rand_*`), and earlier pilot configurations. |
+| `logs/agent_log.jsonl` | One record per agent-loop run (152 in total: the 76 reported-campaign runs plus superseded attempts): verbatim prompt, verbatim model response, declared hypothesis and category, decision, scores, wall-clock cost, and model identifier with token usage. |
 | `logs/random_search_log.jsonl` | The matched-budget random-proposal control: sampled mutation, decision, scores, seed. |
 | `logs/results.tsv` | Every scored run, including the pilot, with the splits computed by each run (`splits_seen`, `selection_splits`). |
-| `logs/pilot/` | The methodological pilot's controller log and its 3 July 2026 final evaluation (`final_eval_temporal_spatial.csv`), disclosed in Sect. 2.4 of the manuscript. |
+| `logs/pilot/` | The methodological pilot: its controller log (131 iteration records) and its 3 July 2026 final evaluation (`final_eval_temporal_spatial.csv`), disclosed in Sect. 2.4 of the manuscript. |
 | `results/confirmations/` | `metrics_by_basin.csv` for each of the 8 frozen confirmation runs: per-catchment KGE, NSE, log-NSE, PBIAS per evaluation split. These underlie Tables 4 and the confirmation figures. |
 | `results/training_histories/` | Per-epoch training histories of the sequence models. |
+| `results/catchment_index.csv` | Catchment attributes and gauge coordinates (EPSG:3035, derived from LamaH-CE) used by the map figure. |
 | `results/*.json` | Computed outputs of the statistical analyses: paired basin-bootstrap intervals (`bootstrap_ci.json`, `bootstrap_components.json`), scorecard sensitivity (`scorecard_sensitivity.json`), and the agent-versus-control comparison (`random_vs_agent.json`). |
 | `analysis/` | The scripts that produce every table and figure in the manuscript from the files above. |
 
